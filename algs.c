@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:50:24 by elukutin          #+#    #+#             */
-/*   Updated: 2022/12/29 17:09:56 by elukutin         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:03:48 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,17 @@ void	butter_arg(ft_stack *stack_a, ft_stack *stack_b, int size)
 			write(1, "pa\n", 3);
 		}
 	}
+}
+
+
+int find_max(ft_stack *stack_b) // ind to understand where thax maximum value lies 
+{
+	int i;
+
+	i = 0;
+	while (stack_b->arr[i] != stack_b->top)
+		i++;
+	return (i);
 }
 
 void sort_3_elem(ft_stack *stack_a) //assuming that sorted array won't go here, I don't do swaps I just print the steps for the bot 
