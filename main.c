@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2022/12/29 18:24:26 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:14:22 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ps_handler(ft_stack *stack_a, int size, char **args)
 	int *dub_tab[size];
 
 	// i = 1;
-	// j = 0;
+	j = 0;
 	i = size - 1;
 	stack_a->arr = malloc(size * sizeof(int)); // maybe I won't need to mallocate the array here. I will create an array, check it, convert it to an array of indexes and then mallocate indexes
 	if (!stack_a->arr)
@@ -34,18 +34,19 @@ int	ps_handler(ft_stack *stack_a, int size, char **args)
 			free(stack_a);
 			return (0);
 		}
-		stack_a->arr[i] = ft_atoi(args[i]); // probably I will store original values in arg_tab, and I won't fill the arr in stack untill every check is done, so it will be arg_tab[j] = ...
-		if (!dub_control(&dub_tab, i))
+		stack_a->arr[j] = ft_atoi(args[i]); // probably I will store original values in arg_tab, and I won't fill the arr in stack untill every check is done, so it will be arg_tab[j] = ...
+		i--;
+		j++; // So I'm filling the stack in reverse order. My first element will actually be on top
+	}
+	// If I will return sorted integer tab, than I will mallocate it on this step i guess
+	if (!dub_control(&dub_tab, i))
 		{
 			free(stack_a->arr);
 			free(stack_a);
 			return (0);
 		}
-		i--;
-	}
-	// If I will return sorted integer tab, than I will mallocate it on this step i guess
 	stack_a->top = size - 1;
-	alg_choice(stack_a); // if everything went smoothly send the stack further
+	alg_choice(stack_a, size - 1); // if everything went smoothly send the stack further
 	return (1);          // 1 is succes, no Error
 }
 
