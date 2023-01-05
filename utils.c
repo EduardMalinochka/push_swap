@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:30:59 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/03 18:30:07 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:20:38 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,31 @@ int sort_control(int *tab, int size) // return 0 if array is sorted
     return (0);
 }
 
-int *inset_sort(int *tab, int size) // I will use buble sort to small sort arrays, fuck it, I will change it so insert sort
+int *inset_sort(int *tab, int size)
 {
+    int *copy;
     int temp;
     int i;
     int j;
 
     i = 1;
+    copy = malloc(size * sizeof(int));
+    if (!copy)
+        return (0);
+    copy = ft_memcpy(copy, tab, size * sizeof(int));
     while (i < size - 1)
     {
         j = i;
-        while (j > 0 && tab[j] < tab[j - 1])
+        while (j > 0 && copy[j] < copy[j - 1])
         {
-            temp = tab[j];
-            tab[j] = tab[i - 1];
-            tab[j + 1] = temp;
+            temp = copy[j];
+            copy[j] = copy[i - 1];
+            copy[j + 1] = temp;
             j--;
         }
         i++;
     }
-    return (tab);
+    return (copy);
 }
 
 int *val_to_ind(int *val_tab, int *sort_tab, int size)
