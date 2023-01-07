@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/05 20:24:44 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:14:01 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*init_parse(char **args, int size)
 	int		i;
 
 	i = 1;
+	tab = NULL;
 	tab = ft_memcpy(tab, args[i], ft_strlen(args[i]));
 	while (++i <= size - 1)
 	{
@@ -27,10 +28,9 @@ char	*init_parse(char **args, int size)
 	return (tab);
 }
 
-char	*split_and_check(char *tab)
+void	check_num(char *tab)
 {
 	int		i;
-	char	**res;
 
 	i = 0;
 	while (tab[i])
@@ -43,6 +43,57 @@ char	*split_and_check(char *tab)
 			exit(1);
 		}
 	}
+}
+
+ft_stack	*str_to_tab(char *tab)
+{
+	ft_stack *stack_a;
+	char **split;
+	int 	i;
+
+	i = 0;
+	// mallocate the stack I guess
+	split = ft_split(tab, ' ');
+	while (split[i])
+	{
+		stack_a->arr[i] = ft_atoi(split[i]); // !!rewrite atoi special for this project, so it will work with minimal and maximum integers
+		if (stack_a->arr[i] > 2147483647 || stack_a->arr[i] < 2147483648)
+		{
+			free(stack_a->arr);
+			free (stack_a);
+			ft_putstr_fd("Error", 1); // maybe it would be better to rewrite this part
+			exit(1);   // I can return NULL to indicate the fail and free in the main function
+		}
+		i++;
+	}
+	if (!dub_control(stack_a->arr, i))
+	{	
+		ft_putstr_fd("Error", 1); // maybe it would be better to rewrite this part
+		exit(1);   // I can return NULL to indicate the fail and free in the main function}
+	}
+	if (!sort_control)
+		exit(1);
+	stack_a->top = i;
+	return (stack_a);
+}
+
+ft_stack *rev_tab(ft_stack *stack_a)
+{
+	int i;
+	int j;
+	int temp;
+
+	j = 0;
+	i = stack_a->top;
+	while (j < i)
+	{
+		temp = stack_a->arr[i];
+		stack_a->arr[i] = stack_a->arr[j];
+		stack_a->arr[j] = temp;
+		i--;
+		j++;
+	}
+	return (stack_a);
 }
 
 int	ps_handler(ft_stack *stack_a, int size, char **args)
@@ -94,21 +145,16 @@ int	ps_handler(ft_stack *stack_a, int size, char **args)
 
 int	main(int ac, char **av)
 {
-	ft_stack	*stack_a;
+	char *init_tab;
+	ft_stack *stack_a;
 
-	if (ac > 2)
-	{
+	if (ac > 1)
+	{ 
+		init_tab = init_parse(av, ac);
+		check_num(init_tab);
 		stack_a = malloc(sizeof(stack_a));
-		ps_handler(stack_a, av, ac - 1);
-		// some function here to handle char** and atoi values. And ac-1 as a size of stack
-		if (!ps_handler)
-		{
-			free(stack_a);
-			ft_putstr_fd("Error", 1);
-			return (0);
-		}
+		stack_a = str_to_tab(init_tab);
+		stack_a = rev_tab(stack_a);
+		
 	}
-	else
-		ft_putstr_fd("Error", 1); // don't forget to consider for the two elems
-	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:21:57 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/03 12:57:28 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:30:36 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "push_swap.h"
 
 void	swap(ft_stack *stack)
 {

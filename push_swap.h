@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:17:45 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/05 15:45:27 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:47:11 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ss(ft_stack *a, ft_stack *b);
 void	push(ft_stack *to, ft_stack *from);
 void	rotate(ft_stack *stack, int up);
 void	double_rotate(ft_stack *a, ft_stack *b, int up);
-int		*inset_sort(int *tab, int size);
+int		*insert_sort(int *tab, int size);
 int		*val_to_ind(int *val_tab, int *sort_tab, int size);
 int		sort_control(int *tab, int size);
 int		dub_control(int *arr, int size);
