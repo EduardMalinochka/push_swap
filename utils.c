@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:30:59 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/06 17:46:43 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/07 20:39:53 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,20 @@ int *insert_sort(int *tab, int size)
     return (copy);
 }
 
-int *val_to_ind(int *val_tab, int *sort_tab, int size)
+void    val_to_ind(ft_stack *stack_a, int *sort_tab)
 {
     int i;
     int j;
-    int res[size];
 
     i = 0;
-    while (i <= size)
+    while (i <= stack_a->top)
     {
         j = 0;
-        while (val_tab[i] != sort_tab[j])
+        while (stack_a->arr[i] != sort_tab[j])
             j++;
-        res[i] = j;
+        stack_a->arr[i] = j;
         i++;
     }
-    return (res);
 }
 
 int ft_sqrt(int n) // probably I can start from the bigger number, depending on the lowest input I would to an alg
@@ -120,7 +118,7 @@ int ft_ps_atoi (const char *str)
 			res = res * 10 + (str[i++] - 48) * sign;
 			if (res > 2147483647 || res < -2147483648)
 			{	
-                ft_putstr("Error", 1);
+                ft_putstr_fd("Error", 1);
                 exit(1);
             }
 		}
