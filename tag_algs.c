@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 10:53:46 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/08 10:54:50 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:54:28 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	sort_control(int *tab, int size) // return 0 if array is sorted
 {
 	int i = 0;
-	while (i <= size - 1)
+	while (i < size - 1)
 	{
 		if (tab[i] < tab[i + 1])
 			return (1);
@@ -73,10 +73,10 @@ int	dub_control(int *arr, int size)
 	int	j;
 
 	i = 0;
-	while (i <= size - 1)
+	while (i < size - 1)
 	{
 		j = i + 1;
-		while (j <= size)
+		while (j < size)
 		{
 			if (arr[i] == arr[j])
 				return (0);

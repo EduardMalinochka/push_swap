@@ -6,11 +6,12 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/08 13:33:43 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/08 17:48:03 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 char	*init_parse(char **args, int size) // seemingly it's ok (except the leaks in strjoin)
 {
@@ -18,11 +19,12 @@ char	*init_parse(char **args, int size) // seemingly it's ok (except the leaks i
 	int		i;
 
 	i = 1;
-	tab = args[i];
+	tab = ft_strdup(args[i]);
 	while (++i < size)
 	{
 		tab = ft_strjoin_gnl(tab, " "); // i will need  to use strjoin from get next line to avoid leaks
 		tab = ft_strjoin_gnl(tab, args[i]);
+
 	}
 	return (tab);
 }
@@ -33,7 +35,6 @@ void	str_to_tab(ft_stack *stack_a, char *tab) //seemingly ok
 	int			i;
 
 	i = 0;
-	// mallocate the stack I guess
 	split = ft_split(tab, ' ');
 	while (split[i])
 		i++;
@@ -46,7 +47,7 @@ void	str_to_tab(ft_stack *stack_a, char *tab) //seemingly ok
 	}
 	if (!dub_control(stack_a->arr, i))
 		error();
-	if (!sort_control(stack_a->arr,  i))
+	if (!sort_control(stack_a->arr,  i ))
 		exit(0);
 	stack_a->top = i - 1;
 }
