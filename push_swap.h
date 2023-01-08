@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:17:45 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/08 01:00:24 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:24:40 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_tack
 {
 	int	*arr;
 	int top; // top will hold the index of the variable on top of the stack
-	// that will be the index of the value that should be in the middle (i will find that by initailly sorting)
+				// that will be the index of the value that should be in the middle (i will find that by initailly sorting)
 }		ft_stack;
 
 int		sort_control(int *tab, int size);
@@ -35,6 +35,7 @@ void	val_to_ind(ft_stack *stack_a, int *sort_tab);
 int		sort_control(int *tab, int size);
 int		dub_control(int *arr, int size);
 int		ft_ps_atoi(const char *str);
+void	error(void);
 
 /*
 typedef enum e_intruc

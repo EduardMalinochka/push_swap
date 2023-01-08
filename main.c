@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/08 01:46:09 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:33:43 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,15 @@ char	*init_parse(char **args, int size) // seemingly it's ok (except the leaks i
 
 	i = 1;
 	tab = args[i];
-	while (++i <= size - 1)
+	while (++i < size)
 	{
-		tab = ft_strjoin(tab, " "); // i will need  to use strjoin from get next line to avoid leaks
-		tab = ft_strjoin(tab, args[i]);
+		tab = ft_strjoin_gnl(tab, " "); // i will need  to use strjoin from get next line to avoid leaks
+		tab = ft_strjoin_gnl(tab, args[i]);
 	}
 	return (tab);
 }
 
-void	check_num(char *tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		if (ft_isdigit(tab[i]) || tab[i] == ' ') // короче говоря, тут проблема с тем
-				i++; // что если напариваюсь на минус, то отлавливаю error
-		else
-		{
-			ft_putstr_fd("Error", 1);
-			exit(1);
-		}
-	}
-}
-
-void	str_to_tab(ft_stack *stack_a, char *tab)
+void	str_to_tab(ft_stack *stack_a, char *tab) //seemingly ok
 {
 	char		**split;
 	int			i;
@@ -58,20 +41,17 @@ void	str_to_tab(ft_stack *stack_a, char *tab)
 	i = 0;
 	while (split[i])
 	{
-		stack_a->arr[i] = ft_ps_atoi(split[i]);
+		stack_a->arr[i] = ft_ps_atoi(split[i]); //atoi checks for integers out of size and for garbage values
 		i++;
 	}
-	// if (!dub_control(stack_a->arr, i))
-	// {
-	// 	ft_putstr_fd("Error", 1);
-	// 	exit(1);
-	// }
-	// if (!sort_control(stack_a->arr, i))
-	// 	exit(0);
-	stack_a->top = i;
+	if (!dub_control(stack_a->arr, i))
+		error();
+	if (!sort_control(stack_a->arr,  i))
+		exit(0);
+	stack_a->top = i - 1;
 }
 
-void	rev_tab(ft_stack *stack_a)
+void	rev_tab(ft_stack *stack_a) //works ok
 {
 	int	i;
 	int	j;
@@ -113,8 +93,7 @@ int	main(int ac, char **av)
 	if (ac > 1)
 	{
 		init_tab = init_parse(av, ac);
-		check_num(init_tab);
-		stack_a = malloc(sizeof(stack_a));
+		stack_a = malloc(sizeof(ft_stack));
 		str_to_tab(stack_a, init_tab);
 		rev_tab(stack_a); 
 		sorted_arr = insert_sort(stack_a->arr, stack_a->top);

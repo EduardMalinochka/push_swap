@@ -6,98 +6,29 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:30:59 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/07 20:39:53 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:24:30 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int dub_control(int *arr, int size) // I want to have a smart dublication control, using in like a dict in python. Not sure tho how I will implement it
+int	ft_sqrt(int n)
 {
-    int i;
-    int j;
+	int res;
 
-    i = 0;
-    while (i <= size - 1)
-    {   
-        j = i + 1;
-        while (j <= size)
-        {
-            if (arr[i] == arr[j])
-                return (0);
-            j++;
-        }
-        i++;
-    }
-    return (1);
+	res = 2;
+	while (n / res != res)
+		res++;
+	return (res);
 }
 
-int sort_control(int *tab, int size) // return 0 if array is sorted
+void	error(void)
 {
-    int i = 0;
-    while (i <= size - 1)
-    {
-        if (tab[i] < tab[i + 1])
-            return (1);
-        i++; 
-    }
-    return (0);
+	ft_putstr_fd("Error", 1);
+	exit(1);
 }
 
-int *insert_sort(int *tab, int size)
-{
-    int *copy;
-    int temp;
-    int i;
-    int j;
-
-    i = 1;
-    copy = malloc(size * sizeof(int));
-    if (!copy)
-        return (0);
-    copy = ft_memcpy(copy, tab, size * sizeof(int));
-    while (i < size - 1)
-    {
-        j = i;
-        while (j > 0 && copy[j] < copy[j - 1])
-        {
-            temp = copy[j];
-            copy[j] = copy[i - 1];
-            copy[j + 1] = temp;
-            j--;
-        }
-        i++;
-    }
-    return (copy);
-}
-
-void    val_to_ind(ft_stack *stack_a, int *sort_tab)
-{
-    int i;
-    int j;
-
-    i = 0;
-    while (i <= stack_a->top)
-    {
-        j = 0;
-        while (stack_a->arr[i] != sort_tab[j])
-            j++;
-        stack_a->arr[i] = j;
-        i++;
-    }
-}
-
-int ft_sqrt(int n) // probably I can start from the bigger number, depending on the lowest input I would to an alg
-{
-    int res;
-
-    res = 2;
-    while (n / res != res)
-        res++;
-    return (res);
-}
-
-int ft_ps_atoi (const char *str)
+int	ft_ps_atoi(const char *str)
 {
 	long	i;
 	long	sign;
@@ -117,11 +48,10 @@ int ft_ps_atoi (const char *str)
 		{
 			res = res * 10 + (str[i++] - 48) * sign;
 			if (res > 2147483647 || res < -2147483648)
-			{	
-                ft_putstr_fd("Error", 1);
-                exit(1);
-            }
+				error();
 		}
+		if (!((str[i] >= 48 && str[i] <= 57) || str[i] == '\0'))
+			error();
 	}
 	return (res);
 }
