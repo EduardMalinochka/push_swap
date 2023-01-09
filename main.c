@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/08 17:48:03 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/09 21:02:24 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ void	str_to_tab(ft_stack *stack_a, char *tab) //seemingly ok
 	i = 0;
 	while (split[i])
 	{
+		check_edge(split[i]);
 		stack_a->arr[i] = ft_ps_atoi(split[i]); //atoi checks for integers out of size and for garbage values
 		i++;
 	}
 	if (!dub_control(stack_a->arr, i))
 		error();
-	if (!sort_control(stack_a->arr,  i ))
+	if (!sort_control(stack_a->arr, i) || i == 1)
 		exit(0);
 	stack_a->top = i - 1;
 }
@@ -70,20 +71,29 @@ void	rev_tab(ft_stack *stack_a) //works ok
 	}
 }
 
-// void alg_choice(ft_stack *stack_a, int size)
-// {
-// 	// probably i will create stack b here
-// 	if (size == 3)
-// 	{
-// 		sort_3_elem(stack_a);
-// 		return ;
-// 	}q
-// 	if (size <= 10)
-// 	{	// probably I will use choice arg
-// 		return ;
-// 	}
-// 	// send to the main arg
-// }
+void alg_choice(ft_stack *stack_a)
+{
+	ft_stack *stack_b;
+
+	stack_b = malloc(sizeof(ft_stack));
+	stack_b->top = -1;
+	if (stack_a->top == 1)
+	{
+		ft_putstr_fd("sa\n", 1);
+		return ;
+	}
+	if (stack_a->top == 2)
+	{	sort_3_elem(stack_a);
+		return ;
+	}
+	stack_b->arr = malloc((stack_a->top + 1) * sizeof(int));
+	if (stack_a -> top == 4)
+	{
+		sort_5_elem(stack_a, stack_b);
+		return ;
+	}
+	butter_arg(stack_a, stack_b, stack_a->top + 1);
+}
 
 int	main(int ac, char **av)
 {
@@ -97,8 +107,9 @@ int	main(int ac, char **av)
 		stack_a = malloc(sizeof(ft_stack));
 		str_to_tab(stack_a, init_tab);
 		rev_tab(stack_a); 
-		sorted_arr = insert_sort(stack_a->arr, stack_a->top);
+		sorted_arr = insert_sort(stack_a->arr, stack_a->top + 1);
 		val_to_ind(stack_a, sorted_arr);
+		alg_choice(stack_a);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:30:59 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/08 13:24:30 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:23:26 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@ int	ft_sqrt(int n)
 
 void	error(void)
 {
-	ft_putstr_fd("Error", 1);
+	ft_putstr_fd("Error\n", 1);
 	exit(1);
+}
+
+void check_edge(char *str)
+{
+	if (str[1] == '\0')
+		if (str[0] == 43 || str[0] == 45)
+			error();
 }
 
 int	ft_ps_atoi(const char *str)

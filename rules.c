@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:21:57 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/06 17:30:36 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:13:54 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,26 @@ void	swap(ft_stack *stack)
 {
 	int	temp;
 
-	if (stack->top > 1)
+	if (stack->top > 0)
 	{
 		temp = stack->arr[stack->top - 1];
 		stack->arr[stack->top - 1] = stack->arr[stack->top];
-		stack->arr[stack->top] = temp;
+			stack->arr[stack->top] = temp;
 	}
 }
 
 void	ss(ft_stack *a, ft_stack *b)
 {
-	sa(a);
-	sb(b);
+	swap(a);
+	swap(b);
 }
 
 void	push(ft_stack *to, ft_stack *from)
 {
-	if (from->top > 0)
-	{
-		to->top++;
-		to->arr[to->top] = from->arr[from->top];
-		from->top--;
-	}
+	// if (from->top > 0)
+	to->top++;
+	to->arr[to->top] = from->arr[from->top];
+	from->top--;
 }
 
 void	rotate(ft_stack *stack, int up) // if up is 1 that rotate up, if up is 0 than reverse rotate
