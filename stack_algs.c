@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:50:24 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/09 19:33:21 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:35:00 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,22 @@ int find_max(ft_stack *stack) // ind to understand where thax maximum value lies
 	return (i);
 }
 
+int sorted_stack(ft_stack *stack_a) // top value should be the lowest, if sorted
+{
+	int i;
+
+	i = stack_a->top;
+	while (i > 0)
+	{
+		if (stack_a->arr[i] > stack_a->arr[i - 1])
+			return (0);
+	}
+	return (1);
+}
+
 void sort_3_elem(ft_stack *stack_a) //assuming that sorted array won't go here, I don't do swaps I just print the steps for the bot 
 {
+	// maybe i will need to add checking sort condition
 	if (stack_a->arr[0] == 1 && stack_a->arr[1] == 0)
 	{
 		rotate(stack_a, 0);
@@ -161,4 +175,52 @@ void sort_5_elem(ft_stack *stack_a, ft_stack *stack_b)
 		ft_putstr_fd("pb\n", 1);
 		sort_3_elem(stack_a);
 	}
+	else
+	{
+	 	while (min < stack_a->arr)
+			min++;
+		push(stack_b, stack_a);
+		ft_putstr_fd("pb\n", 1);
+		sort_3_elem(stack_a);
+	}
 }
+
+void chose_act(ft_stack *stack_a, ft_stack *stack_b)
+{
+	if (stack_b ->arr[stack_b->top] == 0)
+	{
+		swap(stack_b);
+		ft_putstr_fd("sb\n", 1);
+	}
+	if (stack_b->arr[stack_b->top] == 4)
+	{	
+		push(stack_a, stack_b);	
+		ft_putstr_fd("pa\n", 1);
+		rotate(stack_a, 1);
+		ft_putstr_fd("ra\n", 1);
+	}
+	if (stack_b->arr[stack_b->top] == 1)
+	{
+		push(stack_a, stack_b);
+		ft_putstr_fd("pa\n", 1);
+	}
+	if (stack_b->arr[stack_a->top] == 3)
+	{
+		push(stack_a, stack_b);
+		t_putstr_fd("pa\n", 1);
+		rotate(stack_a, 1);
+		ft_putstr_fd("ra\n", 1);
+		push(stack_a, stack_b);
+		t_putstr_fd("pa\n", 1);
+		rotate(stack_a, 1);
+		ft_putstr_fd("ra\n", 1);
+	} 
+	while (stack_a->top != -1)
+	{ //at this point it means I have only 1 in b, so I can just push it
+		push(stack_a, stack_b);
+		ft_putstr_fd("pa\n", 1);
+	} 
+}
+
+// /4 3/ /0 1/ /0 4/ 4 0/
+//              0     0 
