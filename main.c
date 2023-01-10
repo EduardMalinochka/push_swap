@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/09 21:02:24 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:26:03 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void alg_choice(ft_stack *stack_a)
 	stack_b->arr = malloc((stack_a->top + 1) * sizeof(int));
 	if (stack_a -> top == 4)
 	{
-		sort_5_elem(stack_a, stack_b);
+		sort_5_elem(stack_a, stack_b, 1); 
 		return ;
 	}
 	butter_arg(stack_a, stack_b, stack_a->top + 1);

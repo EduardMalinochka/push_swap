@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:50:24 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/10 15:35:00 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:09:22 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	butter_arg(ft_stack *stack_a, ft_stack *stack_b, int size) // if needed in 
 	int n;
 	int i;
 	int count;
+	int b;
 
 	count = 0;
 	n = ft_sqrt(size) + (ft_sqrt(size) * 2 / 5); // for optimization purposes
@@ -88,22 +89,45 @@ void	butter_arg(ft_stack *stack_a, ft_stack *stack_b, int size) // if needed in 
 	}
 	while (stack_b->top >= 0)
 	{
-		if (stack_b->arr[stack_b->top] ==  stack_b->top)
+		if (stack_b->arr[stack_b->top] != stack_b->top)
 		{
-			push(stack_a, stack_b);
-			ft_putstr_fd("pa\n", 1);
+			b = find_max(stack_b);
+			if (b > stack_b->top / 2)
+			{
+				while (stack_b->arr[stack_b->top] != b)
+				{
+					rotate(stack_b, 1);
+					ft_putstr_fd("rb\n", 1);
+				}
+			}
+			else
+			{
+				while (stack_b->arr[stack_b->top] != b)
+				{
+					rotate(stack_b, 0);
+					ft_putstr_fd("rrb\n", 1);
+				}
+			}
 		}
 	}
+		push(stack_a, stack_b);
+		ft_putstr_fd("pa\n", 1);
 }
 
 int find_min(ft_stack *stack)
 {
 	int i;
+	int min;
 
-	i = 0;
-	while (stack->arr[i] != 0)
+	i = 1;
+	min = stack->arr[0];
+	while (i <= stack->top)
+	{
+		if (stack->arr[i] < min)
+			return (i);
 		i++;
-	return (i);
+	}
+	return (0);
 }
 
 int find_max(ft_stack *stack) // ind to understand where thax maximum value lies 
@@ -160,7 +184,7 @@ void sort_3_elem(ft_stack *stack_a) //assuming that sorted array won't go here, 
 	}
 }
 
-void sort_5_elem(ft_stack *stack_a, ft_stack *stack_b)
+void sort_5_elem(ft_stack *stack_a, ft_stack *stack_b, int step)
 {
 	int max;
 	int min;
@@ -169,19 +193,28 @@ void sort_5_elem(ft_stack *stack_a, ft_stack *stack_b)
 	min = find_min(stack_a);
 	if (max > min)
 	{
-		while (max < stack_a->top)
-			max++;
-		push(stack_b, stack_a);
-		ft_putstr_fd("pb\n", 1);
-		sort_3_elem(stack_a);
+		while (stack_a->arr[stack_a->top] != max)
+		{
+			rotate(stack_a, 1);
+			ft_putstr_fd("ra\n", 1);
+		}
 	}
 	else
 	{
-	 	while (min < stack_a->arr)
-			min++;
-		push(stack_b, stack_a);
-		ft_putstr_fd("pb\n", 1);
+	 	while (stack_a->arr[stack_a->top] != min)
+		{
+			rotate(stack_a, 1);
+			ft_putstr_fd("ra\n", 1);
+		}
+	}
+	push(stack_b, stack_a);
+	ft_putstr_fd("pb\n", 1);
+	if (step == 1)
+		sort_5_elem(stack_a, stack_b, 0);
+	if (step == 0)
+	{
 		sort_3_elem(stack_a);
+		chose_act(stack_a, stack_b);
 	}
 }
 
@@ -207,15 +240,15 @@ void chose_act(ft_stack *stack_a, ft_stack *stack_b)
 	if (stack_b->arr[stack_a->top] == 3)
 	{
 		push(stack_a, stack_b);
-		t_putstr_fd("pa\n", 1);
+		ft_putstr_fd("pa\n", 1);
 		rotate(stack_a, 1);
 		ft_putstr_fd("ra\n", 1);
 		push(stack_a, stack_b);
-		t_putstr_fd("pa\n", 1);
+		ft_putstr_fd("pa\n", 1);
 		rotate(stack_a, 1);
 		ft_putstr_fd("ra\n", 1);
-	} 
-	while (stack_a->top != -1)
+	}
+	if (stack_b ->arr[stack_b->top] == 0)
 	{ //at this point it means I have only 1 in b, so I can just push it
 		push(stack_a, stack_b);
 		ft_putstr_fd("pa\n", 1);

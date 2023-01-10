@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 12:56:28 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/08 17:46:08 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:10:17 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*ft_strjoin_gnl(char *s1, const char *s2)
 	size_t	i;
 	size_t	j;
 
-	printf("%s\n", s1);
-	printf("s1 %d\n s2 %d\n", ft_strlen(s1) , ft_strlen(s2)  );
 	if (!s1)
 		return (0);
 	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
