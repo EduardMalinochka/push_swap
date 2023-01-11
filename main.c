@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/10 18:26:03 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:59:44 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void alg_choice(ft_stack *stack_a)
 	butter_arg(stack_a, stack_b, stack_a->top + 1);
 }
 
+#include <stdio.h>
 int	main(int ac, char **av)
 {
 	char		*init_tab;	

@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:50:24 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/10 19:09:22 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:18:24 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	butter_arg(ft_stack *stack_a, ft_stack *stack_b, int size) // if needed in 
 // sending int size and just use stack->top+1 instead
 {
 	int n;
-	int i;
+	//int i;
 	int count;
 	int b;
 
@@ -78,7 +78,7 @@ void	butter_arg(ft_stack *stack_a, ft_stack *stack_b, int size) // if needed in 
 		{
 			push(stack_b, stack_a);
 			ft_putstr_fd("pb\n", 1);
-			i = stack_a->top;
+			//i = stack_a->top; no idea why I added this
 			count++;
 		}
 		else
@@ -120,23 +120,43 @@ int find_min(ft_stack *stack)
 	int min;
 
 	i = 1;
-	min = stack->arr[0];
+	min = 0;
 	while (i <= stack->top)
 	{
-		if (stack->arr[i] < min)
-			return (i);
+		if (stack->arr[i] < stack->arr[min])
+			min = i;
 		i++;
 	}
-	return (0);
+	return (min);
 }
 
 int find_max(ft_stack *stack) // ind to understand where thax maximum value lies 
 {
 	int i;
+	int max;
+
+	i = 1;
+	max = 0;
+	while (i <= stack->top)
+	{
+		if (stack->arr[i] > stack->arr[max])
+			max = i;
+		i++;
+	}
+	return (max);
+}
+
+int find_mid(ft_stack *stack) // if mid was not found iters, it means its on top
+{
+	int i;
 
 	i = 0;
-	while (stack->arr[i] != stack->top)
+	while (i < stack->top)
+	{
+		if (i != find_min(stack) && i != find_max(stack))
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
@@ -156,30 +176,29 @@ int sorted_stack(ft_stack *stack_a) // top value should be the lowest, if sorted
 void sort_3_elem(ft_stack *stack_a) //assuming that sorted array won't go here, I don't do swaps I just print the steps for the bot 
 {
 	// maybe i will need to add checking sort condition
-	if (stack_a->arr[0] == 1 && stack_a->arr[1] == 0)
-	{
-		rotate(stack_a, 0);
-		ft_putstr_fd("rra\n", 1);
-	}
-	if (stack_a->arr[0] == 2 && stack_a->arr[1] == 1)
-	{	
-		rotate(stack_a, 1);
-		ft_putstr_fd("ra\n", 1);
-	}
-	if (stack_a->arr[0] == 0)
+	if (stack_a->arr[2] == 0) // = 0
 	{
 		swap(stack_a);
 		ft_putstr_fd("sa\n", 1);
-		return ;
 	}
-	if (stack_a->arr[0] == 1)
-	{	
+	if (stack_a->arr[0] == 0 && stack_a->arr[1] == 1)  // = 0 and 1
+	{
 		rotate(stack_a, 1);
 		ft_putstr_fd("ra\n", 1);
 	}
-	if (stack_a->arr[0] == 2)
+	if (stack_a->arr[0] == 2) // = 2
 	{
-		rotate(stack_a, 0);
+		swap(stack_a);
+		ft_putstr_fd("sa\n", 1);
+	}
+	if (stack_a->arr[0] == 1)    // = 1
+	{
+		rotate(stack_a, 1);
+		ft_putstr_fd("ra\n", 1);
+	}
+	if (stack_a->arr[0] == 0) // = 0
+	{
+		rotate(stack_a, 1);
 		ft_putstr_fd("rra\n", 1);
 	}
 }
@@ -193,18 +212,22 @@ void sort_5_elem(ft_stack *stack_a, ft_stack *stack_b, int step)
 	min = find_min(stack_a);
 	if (max > min)
 	{
-		while (stack_a->arr[stack_a->top] != max)
+		max = stack_a->top - max;
+		while (max > 0)
 		{
 			rotate(stack_a, 1);
 			ft_putstr_fd("ra\n", 1);
+			max--;
 		}
 	}
 	else
 	{
-	 	while (stack_a->arr[stack_a->top] != min)
+		min = stack_a->top - min;
+	 	while (min > 0)
 		{
 			rotate(stack_a, 1);
 			ft_putstr_fd("ra\n", 1);
+			min--;
 		}
 	}
 	push(stack_b, stack_a);
@@ -220,7 +243,7 @@ void sort_5_elem(ft_stack *stack_a, ft_stack *stack_b, int step)
 
 void chose_act(ft_stack *stack_a, ft_stack *stack_b)
 {
-	if (stack_b ->arr[stack_b->top] == 0)
+	if (stack_b->arr[stack_b->top] == 0)
 	{
 		swap(stack_b);
 		ft_putstr_fd("sb\n", 1);
