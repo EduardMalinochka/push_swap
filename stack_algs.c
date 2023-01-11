@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:50:24 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/11 20:18:24 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:40:54 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,31 +172,32 @@ int sorted_stack(ft_stack *stack_a) // top value should be the lowest, if sorted
 	}
 	return (1);
 }
-
+#include <stdio.h>
 void sort_3_elem(ft_stack *stack_a) //assuming that sorted array won't go here, I don't do swaps I just print the steps for the bot 
 {
-	// maybe i will need to add checking sort condition
-	if (stack_a->arr[2] == 0) // = 0
+	// maybe i will need a condition that checks for sorted status
+	if (stack_a->arr[2] == stack_a->arr[find_min(stack_a)]) // = 0
 	{
 		swap(stack_a);
 		ft_putstr_fd("sa\n", 1);
 	}
-	if (stack_a->arr[0] == 0 && stack_a->arr[1] == 1)  // = 0 and 1
+	if (stack_a->arr[0] == stack_a->arr[find_min(stack_a)] 
+	&& stack_a->arr[1] == stack_a->arr[find_mid(stack_a)])  // = 0 and 1
 	{
 		rotate(stack_a, 1);
 		ft_putstr_fd("ra\n", 1);
 	}
-	if (stack_a->arr[0] == 2) // = 2
+	if (stack_a->arr[0] == stack_a->arr[find_max(stack_a)]) // = 2
 	{
 		swap(stack_a);
 		ft_putstr_fd("sa\n", 1);
 	}
-	if (stack_a->arr[0] == 1)    // = 1
+	if (stack_a->arr[0] == stack_a->arr[find_mid(stack_a)])    // = 1
 	{
 		rotate(stack_a, 1);
 		ft_putstr_fd("ra\n", 1);
 	}
-	if (stack_a->arr[0] == 0) // = 0
+	if (stack_a->arr[0] == stack_a->arr[find_min(stack_a)]) // = 0
 	{
 		rotate(stack_a, 1);
 		ft_putstr_fd("rra\n", 1);
