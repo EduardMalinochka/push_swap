@@ -6,13 +6,11 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:50:24 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/11 20:40:54 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:52:45 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
 
 // void	midpoint_alg(ft_stack *stack_a, ft_stack *stack_b, int size)
 // {
@@ -64,14 +62,20 @@ void	butter_arg(ft_stack *stack_a, ft_stack *stack_b, int size) // if needed in 
 
 	count = 0;
 	n = ft_sqrt(size) + (ft_sqrt(size) * 2 / 5); // for optimization purposes
+	//n = 15;
+	//if (size > 150)
+	//	n = 30;  // from 30 to 36
 	while (stack_a->top >= 0)
 	{
 		if (stack_a->arr[stack_a->top] <= count) // don't forget to check if stack_a top can go to -1. It should
 		{
 			push(stack_b, stack_a);
 			ft_putstr_fd("pb\n", 1);
-			rotate(stack_b, 1);
-			ft_putstr_fd("rb\n", 1);
+			if (count > 0)
+			{
+				rotate(stack_b, 1);
+				ft_putstr_fd("rb\n", 1);
+			}
 			count++;
 		}
 		else if (stack_a->arr[stack_a->top] <= count + n)
@@ -92,26 +96,32 @@ void	butter_arg(ft_stack *stack_a, ft_stack *stack_b, int size) // if needed in 
 		if (stack_b->arr[stack_b->top] != stack_b->top)
 		{
 			b = find_max(stack_b);
-			if (b > stack_b->top / 2)
+			if (b >= stack_b->top / 2)
 			{
-				while (stack_b->arr[stack_b->top] != b)
+				b = stack_b->top - b; 
+				while (b > 0)
 				{
 					rotate(stack_b, 1);
 					ft_putstr_fd("rb\n", 1);
+					b--;
 				}
 			}
 			else
 			{
-				while (stack_b->arr[stack_b->top] != b)
+				while (b >= -1)
 				{
 					rotate(stack_b, 0);
 					ft_putstr_fd("rrb\n", 1);
+					b--;
 				}
 			}
 		}
+		else
+		{
+			push(stack_a, stack_b);
+			ft_putstr_fd("pa\n", 1);
+		}
 	}
-		push(stack_a, stack_b);
-		ft_putstr_fd("pa\n", 1);
 }
 
 int find_min(ft_stack *stack)
@@ -172,32 +182,32 @@ int sorted_stack(ft_stack *stack_a) // top value should be the lowest, if sorted
 	}
 	return (1);
 }
-#include <stdio.h>
-void sort_3_elem(ft_stack *stack_a) //assuming that sorted array won't go here, I don't do swaps I just print the steps for the bot 
+
+void sort_3_elem(ft_stack *stack_a) 
 {
 	// maybe i will need a condition that checks for sorted status
-	if (stack_a->arr[2] == stack_a->arr[find_min(stack_a)]) // = 0
+	if (stack_a->arr[2] == stack_a->arr[find_min(stack_a)])
 	{
 		swap(stack_a);
 		ft_putstr_fd("sa\n", 1);
 	}
 	if (stack_a->arr[0] == stack_a->arr[find_min(stack_a)] 
-	&& stack_a->arr[1] == stack_a->arr[find_mid(stack_a)])  // = 0 and 1
+	&& stack_a->arr[1] == stack_a->arr[find_mid(stack_a)])
 	{
 		rotate(stack_a, 1);
 		ft_putstr_fd("ra\n", 1);
 	}
-	if (stack_a->arr[0] == stack_a->arr[find_max(stack_a)]) // = 2
+	if (stack_a->arr[0] == stack_a->arr[find_max(stack_a)])
 	{
 		swap(stack_a);
 		ft_putstr_fd("sa\n", 1);
 	}
-	if (stack_a->arr[0] == stack_a->arr[find_mid(stack_a)])    // = 1
+	if (stack_a->arr[0] == stack_a->arr[find_mid(stack_a)])
 	{
 		rotate(stack_a, 1);
 		ft_putstr_fd("ra\n", 1);
 	}
-	if (stack_a->arr[0] == stack_a->arr[find_min(stack_a)]) // = 0
+	if (stack_a->arr[0] == stack_a->arr[find_min(stack_a)])
 	{
 		rotate(stack_a, 1);
 		ft_putstr_fd("rra\n", 1);
