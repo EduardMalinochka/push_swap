@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:50:24 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 17:40:34 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:18:17 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	butter_arg(t_stack *stack_a, t_stack *stack_b, int size)
 
 	count = 0;
 	n = 3;
-	if (size > 50)
+	if (size >= 50)
 		n = ft_sqrt(size) + (ft_sqrt(size) * 2 / 5);
 	while (stack_a->top >= 0)
 	{
@@ -38,6 +38,7 @@ void	butter_arg(t_stack *stack_a, t_stack *stack_b, int size)
 		else
 			rotate(stack_a, 1, "ra");
 	}
+	butter_return(stack_a, stack_b);
 }
 
 void	butter_return(t_stack *stack_a, t_stack *stack_b)

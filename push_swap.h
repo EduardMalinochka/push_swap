@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:17:45 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 17:37:09 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:18:29 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ss(t_stack *a, t_stack *b);
 void	push(t_stack *to, t_stack *from, char *s);
 void	rotate(t_stack *stack, int up, char *s);
 void	double_rotate(t_stack *a, t_stack *b, int up, char *s);
+void	butter_return(t_stack *stack_a, t_stack *stack_b);
 int		*insert_sort(int *tab, int size);
 void	val_to_ind(t_stack *stack_a, int *sort_tab);
 int		sort_control(int *tab, int size);
