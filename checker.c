@@ -6,12 +6,12 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 18:29:44 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 22:00:48 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:02:56 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
 int	is_rule(char *rule)
 {
 	static char	*rules[] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n",
