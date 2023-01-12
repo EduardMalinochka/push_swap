@@ -6,71 +6,11 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 17:23:43 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:00:31 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-
-char	*init_parse(char **args, int size)
-{
-	char	*tab;
-	int		i;
-
-	i = 1;
-	tab = ft_strdup(args[i]);
-	while (++i < size)
-	{
-		tab = ft_strjoin_gnl(tab, " ");
-		tab = ft_strjoin_gnl(tab, args[i]);
-	}
-	return (tab);
-}
-
-void	str_to_tab(t_stack *stack_a, char *tab)
-{
-	char	**split;
-	int		i;
-
-	i = 0;
-	split = ft_split(tab, ' ');
-	while (split[i])
-		i++;
-	stack_a->arr = malloc(i * sizeof(int));
-	i = 0;
-	while (split[i])
-	{
-		check_edge(split[i]);
-		stack_a->arr[i] = ft_ps_atoi(split[i]);
-		free(split[i]);
-		i++;
-	}
-	free(split);
-	if (!dub_control(stack_a->arr, i))
-		error();
-	if (!sort_control(stack_a->arr, i) || i == 1)
-		exit(0);
-	stack_a->top = i - 1;
-}
-
-void	rev_tab(t_stack *stack_a)
-{
-	int	i;
-	int	j;
-	int	temp;
-
-	j = 0;
-	i = stack_a->top;
-	while (j < i)
-	{
-		temp = stack_a->arr[i];
-		stack_a->arr[i] = stack_a->arr[j];
-		stack_a->arr[j] = temp;
-		i--;
-		j++;
-	}
-}
 
 void	alg_choice(t_stack *stack_a)
 {
@@ -109,7 +49,7 @@ int	main(int ac, char **av)
 	{
 		init_tab = init_parse(av, ac);
 		stack_a = malloc(sizeof(t_stack));
-		str_to_tab(stack_a, init_tab);
+		str_to_tab(stack_a, init_tab, 0);
 		rev_tab(stack_a);
 		sorted_arr = insert_sort(stack_a->arr, stack_a->top + 1);
 		val_to_ind(stack_a, sorted_arr);
