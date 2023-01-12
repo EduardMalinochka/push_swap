@@ -6,13 +6,13 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:21:57 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/11 16:50:18 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:13:06 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(ft_stack *stack)
+void	swap(t_stack *stack, char *s)
 {
 	int	temp;
 
@@ -22,23 +22,24 @@ void	swap(ft_stack *stack)
 		stack->arr[stack->top - 1] = stack->arr[stack->top];
 			stack->arr[stack->top] = temp;
 	}
+	ft_putendl_fd(s, 1);
 }
 
-void	ss(ft_stack *a, ft_stack *b)
+void	ss(t_stack *a, t_stack *b)
 {
-	swap(a);
-	swap(b);
+	swap(a, "sa");
+	swap(b, "sb");
 }
 
-void	push(ft_stack *to, ft_stack *from)
+void	push(t_stack *to, t_stack *from, char *s)
 {
-	// if (from->top > 0)
 	to->top++;
 	to->arr[to->top] = from->arr[from->top];
 	from->top--;
+	ft_putendl_fd(s, 1);
 }
 
-void	rotate(ft_stack *stack, int up) // if up is 1 that rotate up, if up is 0 than reverse rotate
+void	rotate(t_stack *stack, int up, char *s)
 {
 	int	temp;
 	int	i;
@@ -46,29 +47,25 @@ void	rotate(ft_stack *stack, int up) // if up is 1 that rotate up, if up is 0 th
 	if (up == 1)
 	{
 		temp = stack->arr[stack->top];
-		i = stack->top;
-		while (i > 0)
-		{
+		i = stack->top + 1;
+		while (--i > 0)
 			stack->arr[i] = stack->arr[i - 1];
-			i--;
-		}
 		stack->arr[0] = temp;
+		ft_putendl_fd(s, 1);
 	}
 	else
 	{
 		temp = stack->arr[0];
-		i = 0;
-		while (i < stack->top)
-		{
+		i = -1;
+		while (++i < stack->top)
 			stack->arr[i] = stack->arr[i + 1];
-			i++;
-		}
 		stack->arr[stack->top] = temp;
+		ft_putendl_fd(s, 1);
 	}
 }
 
-void	double_rotate(ft_stack *a, ft_stack *b, int up)
+void	double_rotate(t_stack *a, t_stack *b, int up, char *s)
 {
-	rotate(a, up);
-	rotate(b, up);
+	rotate(a, up, s);
+	rotate(b, up, s);
 }

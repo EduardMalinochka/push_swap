@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tag_algs.c                                         :+:      :+:    :+:   */
+/*   int_algs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 10:53:46 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/09 16:07:21 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:58:15 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sort_control(int *tab, int size) // return 0 if array is sorted
+int	sort_control(int *tab, int size)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (i < size - 1)
 	{
 		if (tab[i] > tab[i + 1])
@@ -51,7 +53,7 @@ int	*insert_sort(int *tab, int size)
 	return (copy);
 }
 
-void	val_to_ind(ft_stack *stack_a, int *sort_tab)
+void	val_to_ind(t_stack *stack_a, int *sort_tab)
 {
 	int	i;
 	int	j;

@@ -6,14 +6,14 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/11 13:59:44 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:23:43 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-char	*init_parse(char **args, int size) // seemingly it's ok (except the leaks in strjoin)
+char	*init_parse(char **args, int size)
 {
 	char	*tab;
 	int		i;
@@ -22,17 +22,16 @@ char	*init_parse(char **args, int size) // seemingly it's ok (except the leaks i
 	tab = ft_strdup(args[i]);
 	while (++i < size)
 	{
-		tab = ft_strjoin_gnl(tab, " "); // i will need  to use strjoin from get next line to avoid leaks
+		tab = ft_strjoin_gnl(tab, " ");
 		tab = ft_strjoin_gnl(tab, args[i]);
-
 	}
 	return (tab);
 }
 
-void	str_to_tab(ft_stack *stack_a, char *tab) //seemingly ok
+void	str_to_tab(t_stack *stack_a, char *tab)
 {
-	char		**split;
-	int			i;
+	char	**split;
+	int		i;
 
 	i = 0;
 	split = ft_split(tab, ' ');
@@ -43,9 +42,11 @@ void	str_to_tab(ft_stack *stack_a, char *tab) //seemingly ok
 	while (split[i])
 	{
 		check_edge(split[i]);
-		stack_a->arr[i] = ft_ps_atoi(split[i]); //atoi checks for integers out of size and for garbage values
+		stack_a->arr[i] = ft_ps_atoi(split[i]);
+		free(split[i]);
 		i++;
 	}
+	free(split);
 	if (!dub_control(stack_a->arr, i))
 		error();
 	if (!sort_control(stack_a->arr, i) || i == 1)
@@ -53,7 +54,7 @@ void	str_to_tab(ft_stack *stack_a, char *tab) //seemingly ok
 	stack_a->top = i - 1;
 }
 
-void	rev_tab(ft_stack *stack_a) //works ok
+void	rev_tab(t_stack *stack_a)
 {
 	int	i;
 	int	j;
@@ -71,11 +72,11 @@ void	rev_tab(ft_stack *stack_a) //works ok
 	}
 }
 
-void alg_choice(ft_stack *stack_a)
+void	alg_choice(t_stack *stack_a)
 {
-	ft_stack *stack_b;
+	t_stack	*stack_b;
 
-	stack_b = malloc(sizeof(ft_stack));
+	stack_b = malloc(sizeof(t_stack));
 	stack_b->top = -1;
 	if (stack_a->top == 1)
 	{
@@ -83,31 +84,33 @@ void alg_choice(ft_stack *stack_a)
 		return ;
 	}
 	if (stack_a->top == 2)
-	{	sort_3_elem(stack_a);
+	{
+		sort_3_elem(stack_a);
 		return ;
 	}
 	stack_b->arr = malloc((stack_a->top + 1) * sizeof(int));
-	if (stack_a -> top == 4)
+	if (stack_a->top == 4)
 	{
-		sort_5_elem(stack_a, stack_b, 1); 
+		sort_5_elem(stack_a, stack_b, 1);
 		return ;
 	}
 	butter_arg(stack_a, stack_b, stack_a->top + 1);
+	free(stack_b->arr);
+	free(stack_b);
 }
 
-#include <stdio.h>
 int	main(int ac, char **av)
 {
-	char		*init_tab;	
-	int			*sorted_arr;
-	ft_stack	*stack_a;
+	char	*init_tab;
+	int		*sorted_arr;
+	t_stack	*stack_a;
 
 	if (ac > 1)
 	{
 		init_tab = init_parse(av, ac);
-		stack_a = malloc(sizeof(ft_stack));
+		stack_a = malloc(sizeof(t_stack));
 		str_to_tab(stack_a, init_tab);
-		rev_tab(stack_a); 
+		rev_tab(stack_a);
 		sorted_arr = insert_sort(stack_a->arr, stack_a->top + 1);
 		val_to_ind(stack_a, sorted_arr);
 		alg_choice(stack_a);
