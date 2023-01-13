@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:16:23 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 22:00:31 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:36:42 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,15 @@ void	alg_choice(t_stack *stack_a)
 
 	stack_b = malloc(sizeof(t_stack));
 	stack_b->top = -1;
-	if (stack_a->top == 1)
-	{
-		ft_putstr_fd("sa\n", 1);
-		return ;
-	}
-	if (stack_a->top == 2)
-	{
-		sort_3_elem(stack_a);
-		return ;
-	}
 	stack_b->arr = malloc((stack_a->top + 1) * sizeof(int));
-	if (stack_a->top == 4)
-	{
+	if (stack_a->top == 1)
+		ft_putstr_fd("sa\n", 1);
+	else if (stack_a->top == 2)
+		sort_3_elem(stack_a);
+	else if (stack_a->top == 4)
 		sort_5_elem(stack_a, stack_b, 1);
-		return ;
-	}
-	butter_arg(stack_a, stack_b, stack_a->top + 1);
+	else
+		butter_arg(stack_a, stack_b, stack_a->top + 1);
 	free(stack_b->arr);
 	free(stack_b);
 }

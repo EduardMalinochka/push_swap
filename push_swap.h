@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:17:45 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 22:00:05 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:36:26 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct s_sack
 	int	top;
 }		t_stack;
 
+typedef struct s_norm
+{
+	int	count;
+	int	n;
+}		t_norm;
+
 int		sort_control(int *tab, int size);
 void	sort_3_elem(t_stack *stack_a);
 void	sort_5_elem(t_stack *stack_a, t_stack *stack_b, int step);
@@ -29,7 +35,7 @@ void	swap(t_stack *stack, char *s);
 void	ss(t_stack *a, t_stack *b);
 void	push(t_stack *to, t_stack *from, char *s);
 void	rotate(t_stack *stack, int up, char *s);
-void	double_rotate(t_stack *a, t_stack *b, int up, char *s);
+void	double_rotate(t_stack *a, t_stack *b, int up);
 void	c_swap(t_stack *stack);
 void	c_ss(t_stack *a, t_stack *b);
 void	c_push(t_stack *to, t_stack *from);
@@ -52,13 +58,10 @@ void	chose_act(t_stack *stack_a, t_stack *stack_b);
 char	*init_parse(char **args, int size);
 void	str_to_tab(t_stack *stack_a, char *tab, int checker);
 void	rev_tab(t_stack *stack_a);
+int		find_closest(int *arr, int top, int val);
+void	butter_stack_ra(t_stack *stack_a, t_stack *stack_b, t_norm var,
+			int *boo);
+void	butter_stack_rra(t_stack *stack_a, t_stack *stack_b, int *boo,
+			int count);
 
-/*
-typedef enum e_intruc
-{
-	sa,
-	sb,
-	ss	
-}		t_intruc;
-*/
 #endif

@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:35:51 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 17:45:16 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:47:12 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,18 @@ int	sorted_stack(t_stack *stack_a)
 		i--;
 	}
 	return (1);
+}
+
+int	find_closest(int *arr, int top, int val)
+{
+	int	i;
+
+	i = top;
+	while (i >= 0)
+	{
+		if (arr[i] <= val)
+			return (i);
+		i--;
+	}
+	return (0);
 }

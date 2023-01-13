@@ -6,7 +6,7 @@
 #    By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 17:57:43 by elukutin          #+#    #+#              #
-#    Updated: 2023/01/12 21:43:46 by elukutin         ###   ########.fr        #
+#    Updated: 2023/01/13 14:46:25 by elukutin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = push_swap
 BONUS = checker
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-SRC = int_algs.c main.c rules.c stack_algs.c utils.c stack_utils.c main_steps.c
+SRC = int_algs.c main.c rules.c stack_main_alg.c utils.c stack_utils.c main_steps.c checker_rules.c \
+	stack_small_algs.c
 OBJ = $(SRC:.c=.o)
 BONUS_SRC = checker.c checker_rules.c stack_utils.c int_algs.c utils.c main_steps.c
 B_OBJS = $(BONUS_SRC:.c=.o)

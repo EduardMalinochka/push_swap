@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 18:29:44 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 22:02:56 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:39:18 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ void	check_and_apply(t_stack *stack_a)
 		{
 			free(stack_b->arr);
 			free(stack_b);
+			free(res);
 			error();
 		}
 		choose_act(res, stack_a, stack_b);
 		res = get_next_line(0);
 	}
+	free(res);
 	free(stack_b->arr);
 	free(stack_b);
 }

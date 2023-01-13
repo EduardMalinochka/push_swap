@@ -6,7 +6,7 @@
 /*   By: elukutin <elukutin@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:21:57 by elukutin          #+#    #+#             */
-/*   Updated: 2023/01/12 20:34:22 by elukutin         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:08:05 by elukutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	swap(t_stack *stack, char *s)
 
 void	ss(t_stack *a, t_stack *b)
 {
-	swap(a, "sa");
-	swap(b, "sb");
+	c_swap(a);
+	c_swap(b);
+	ft_putendl_fd("ss", 1);
 }
 
 void	push(t_stack *to, t_stack *from, char *s)
@@ -64,8 +65,14 @@ void	rotate(t_stack *stack, int up, char *s)
 	}
 }
 
-void	double_rotate(t_stack *a, t_stack *b, int up, char *s)
+void	double_rotate(t_stack *a, t_stack *b, int up)
 {
-	rotate(a, up, s);
-	rotate(b, up, s);
+	c_rotate(a, up);
+	c_rotate(b, up);
+	if (up == 1)
+	{
+		ft_putendl_fd("rr", 1);
+		return ;
+	}
+	ft_putendl_fd("rrr", 1);
 }
